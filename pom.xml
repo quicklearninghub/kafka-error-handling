@@ -9,11 +9,16 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.quicklearninghub</groupId>
-	<artifactId>kafka-filtered</artifactId>
+	<artifactId>kafka-error-handling</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>kafka-filtered</name>
+    <packaging>pom</packaging>
+    <name>kafka-error-handling</name>
 	<description>Demo project for Kafka filtered listener using Spring Boot</description>
-	<properties>
+    <modules>
+		<module>main-consumer</module>
+		<module>retry-consumer</module>
+    </modules>
+    <properties>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
