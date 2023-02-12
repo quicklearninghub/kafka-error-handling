@@ -1,8 +1,14 @@
-## Kafka filtered listener demo project
+## kafka-error-handling
+Kafka Application which uses main topic and retry topic, and h2 database to retry and handle the error.
 
-The project exposes a simple rest endpoint to publish the message to a kafka topic using spring kafka's KafkaTemplate.
+The messages are produced and sent to a Kafka topic.
+The messages are consumed by a Kafka consumer that is part of the application.
+The consumer processes the messages and performs the desired business logic.
+If the consumer is unable to process a message successfully, it publishes the failed message to a "retry" topic.
+A separate Kafka consumer, known as the retry consumer, is listening to the "retry" topic.
+The retry consumer receives the failed message and tries to process it again.
+If the retry consumer is unable to process the message successfully, it stores the message in a SQL database using JPA.
 
-The project has a filtered listener which only consumes the messages that meets the filtered criteria based on the filter criteria d
 
 ### Versions:
 Spring boot: 3.0.2
@@ -10,14 +16,7 @@ Apache Kafka: 3.3.2
 
 
 ### To start:
-Run the KafkaFilteredApplication as main spring boot application.
-Provide VM options to activate different profiles.
-
-#### To run first consumer:
--Dspring.profiles.active=newm
-
-#### To run second consumer:
--Dspring.profiles.active=canc
+Run the KafkaMainApplication and KafkaRetryApplication as main spring boot application.
 
 ### Request endpoint
 ### POST:
@@ -29,14 +28,3 @@ http://localhost:8080/publish
 "eventType": "NEWM",
 "message": "NEW message consumed."
 }
-
-#### Request 2
-{
-"eventType": "CANC",
-"message": "Cancel message skipped."
-}
-
-
-
-    
-
